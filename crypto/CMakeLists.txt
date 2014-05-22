@@ -44,7 +44,7 @@ set(root_srcs # order from crypto/Makefile
 set(root_exhdrs
   crypto.h
   opensslv.h
-  opensslconf.h
+  ${CMAKE_BINARY_DIR}/openssl/opensslconf.h
   ebcdic.h
   symhacks.h
   ossl_typ.h
