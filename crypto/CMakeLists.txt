@@ -9,7 +9,7 @@ set(CONF "
 #define OPENSSL_NO_SCTP
 ${CONF}"
   )
-file(WRITE ${CMAKE_BINARY_DIR}/openssl/opensslconf.h "${CONF}")
+file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/opensslconf.h "${CONF}")
 ########################################
 include_directories(
   ${CMAKE_CURRENT_BINARY_DIR} # buildinf.h
@@ -44,7 +44,7 @@ set(root_srcs # order from crypto/Makefile
 set(root_exhdrs
   crypto.h
   opensslv.h
-  ${CMAKE_BINARY_DIR}/openssl/opensslconf.h
+  ${CMAKE_CURRENT_BINARY_DIR}/opensslconf.h
   ebcdic.h
   symhacks.h
   ossl_typ.h
