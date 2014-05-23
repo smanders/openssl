@@ -87,7 +87,11 @@ add_custom_command(OUTPUT ${lib_name}_hdrs_cmd
     -DsrcDir:PATH=${CMAKE_CURRENT_SOURCE_DIR}
     -Ddst:PATH=${CMAKE_BINARY_DIR}/openssl -P ${openssl_SOURCE_DIR}/cpln.cmake
   )
-add_custom_target(${lib_name}_hdrs DEPENDS ${lib_name}_hdrs_cmd)
+add_custom_target(${lib_name}_hdrs
+  DEPENDS ${lib_name}_hdrs_cmd
+  SOURCES ${openssl_SOURCE_DIR}/cpln.cmake
+  )
+set_property(TARGET ${lib_name}_hdrs PROPERTY FOLDER openssl_h)
 ########################################
 # library
 add_library(${lib_name} STATIC ${${lib_name}_libsrcs})

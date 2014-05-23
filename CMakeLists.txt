@@ -10,7 +10,8 @@ add_custom_command(OUTPUT ossl_hdrs_cmd
     -DsrcDir:PATH=${openssl_SOURCE_DIR}
     -Ddst:PATH=${CMAKE_BINARY_DIR}/openssl -P ${openssl_SOURCE_DIR}/cpln.cmake
   )
-add_custom_target(ossl_hdrs DEPENDS ossl_hdrs_cmd)
+add_custom_target(ossl_hdrs DEPENDS ossl_hdrs_cmd SOURCES cpln.cmake)
+set_property(TARGET ossl_hdrs PROPERTY FOLDER openssl_h)
 ########################################
 add_subdirectory(crypto)
 add_subdirectory(ssl)
