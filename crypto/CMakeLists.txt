@@ -7,6 +7,7 @@ file(READ opensslconf.h.in CONF)
 set(CONF "
 #define OPENSSL_NO_KRB5
 #define OPENSSL_NO_SCTP
+#define OPENSSL_NO_EC_NISTP_64_GCC_128
 ${CONF}"
   )
 file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/opensslconf.h "${CONF}")
