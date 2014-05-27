@@ -30,3 +30,5 @@ set(misc
   README.ENGINE
   )
 install(FILES ${misc} DESTINATION share/openssl)
+install(FILES ${PROJECT_NAME}-config.cmake DESTINATION share/cmake)
+install(EXPORT ${PROJECT_NAME}-targets DESTINATION share/cmake)

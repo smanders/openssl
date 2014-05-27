@@ -99,7 +99,7 @@ add_dependencies(${lib_name} ${lib_deps} ${lib_name}_hdrs)
 target_link_libraries(${lib_name} ${lib_deps})
 ########################################
 # install
-install(TARGETS ${lib_name}
+install(TARGETS ${lib_name} EXPORT ${PROJECT_NAME}-targets
   RUNTIME DESTINATION bin${NUMBITS}
   LIBRARY DESTINATION lib${NUMBITS}
   ARCHIVE DESTINATION lib${NUMBITS}
