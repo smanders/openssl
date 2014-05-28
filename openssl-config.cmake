@@ -2,7 +2,7 @@
 # OPENSSL_INCLUDE_DIR - the OpenSSL include directory
 # OPENSSL_LIBRARIES - the OpenSSL libraries
 set(prj openssl)
-# this file (-config) installed to share/make (see top-level CMakeLists.txt)
+# this file (-config) installed to share/cmake (see top-level CMakeLists.txt)
 get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 # targets file (-targets) installed to lib${NUMBITS}/cmake
 include(${SELF_DIR}/../../lib${NUMBITS}/cmake/${prj}-targets.cmake)
