@@ -9,6 +9,7 @@ include(${SELF_DIR}/../../lib${NUMBITS}/cmake/${prj}-targets.cmake)
 string(TOUPPER ${prj} PRJ)
 get_filename_component(${PRJ}_INCLUDE_DIR "${SELF_DIR}/../../include" ABSOLUTE)
 set(${PRJ}_LIBRARIES crypto ssl)
+include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(${prj}
   REQUIRED_VARS
     ${PRJ}_INCLUDE_DIR
