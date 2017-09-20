@@ -42,9 +42,15 @@ function(compareCmakeFilesys files)
   endif()
 endfunction()
 ########################################
+if(DEFINED OPENSSL_VER)
+  set(ver _${OPENSSL_VER})
+  set(verDir /${PROJECT_NAME}${ver})
+endif()
+set(targetsFile ${PROJECT_NAME}${ver}-targets)
+########################################
 add_subdirectory(crypto)
 add_subdirectory(ssl)
-install(FILES e_os2.h DESTINATION include/openssl)
+install(FILES e_os2.h DESTINATION include${verDir}/${PROJECT_NAME})
 set(misc
   FAQ
   LICENSE
@@ -53,5 +59,5 @@ set(misc
   README.ASN1
   README.ENGINE
   )
-install(FILES ${misc} DESTINATION share/openssl)
-install(EXPORT ${PROJECT_NAME}-targets DESTINATION lib/cmake)
+install(FILES ${misc} DESTINATION share${verDir}/openssl)
+install(EXPORT ${targetsFile} DESTINATION lib/cmake)

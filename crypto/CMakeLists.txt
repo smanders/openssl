@@ -2070,12 +2070,13 @@ set_property(TARGET ${lib_name}_hdrs PROPERTY FOLDER openssl_h)
 ########################################
 # library
 add_library(${lib_name} STATIC ${${lib_name}_libsrcs})
+set_target_properties(${lib_name} PROPERTIES OUTPUT_NAME ${lib_name}${ver})
 add_dependencies(${lib_name} ${lib_name}_hdrs ssl_hdrs)
 ########################################
 # install
-install(TARGETS ${lib_name} EXPORT ${PROJECT_NAME}-targets
+install(TARGETS ${lib_name} EXPORT ${targetsFile}
   RUNTIME DESTINATION bin
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib
   )
-install(FILES ${${lib_name}_exhdrs} DESTINATION include/openssl)
+install(FILES ${${lib_name}_exhdrs} DESTINATION include${verDir}/${PROJECT_NAME})
