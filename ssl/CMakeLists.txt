@@ -81,6 +81,11 @@ list(APPEND root_srcs
 set(root_extra # in directory, not in Makefile LIBSRC
   ssltest.c
   heartbeat_test.c
+  clienthellotest.c
+  sslv2conftest.c
+  dtlstest.c
+  bad_dtls_test.c
+  fatalerrtest.c
   )
 list(APPEND root_extra # in directory, not in Makefile
   ssl_task.c

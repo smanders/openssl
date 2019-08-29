@@ -256,6 +256,7 @@ list(APPEND asn1_srcs
   asn1/Makefile
   )
 set(asn1_extra # in directory, not in Makefile LIBSRC
+  asn1/asn1_int.h
   asn1/charmap.h
   )
 list(APPEND asn1_extra # in directory, not in Makefile
@@ -1987,10 +1988,13 @@ list(APPEND x509_srcs
   x509/vpm_int.h
   x509/Makefile
   )
+set(x509_extra # in directory, not in Makefile LIBSRC
+  x509/verify_extra_test.c
+  )
 source_group(x509 FILES ${x509_srcs})
 list(APPEND ${lib_name}_libsrcs ${x509_srcs})
 list(APPEND ${lib_name}_exhdrs ${x509_exhdrs})
-list(APPEND ${lib_name}_all ${x509_srcs})
+list(APPEND ${lib_name}_all ${x509_srcs} ${x509_extra})
 ####################
 # x509v3
 set(x509v3_srcs # order from crypto/x509v3/Makefile
