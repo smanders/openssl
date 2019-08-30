@@ -706,8 +706,10 @@ list(APPEND des_extra # in directory, not in Makefile
   des/rpw.c
   des/speed.c
   )
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/des/t/test)
+  list(APPEND des_extra des/t/test)
+endif()
 list(APPEND des_extra # subdirectories
-  des/t/test
   des/times/486-50.sol
   des/times/586-100.lnx
   des/times/686-200.fre
