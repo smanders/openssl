@@ -98,7 +98,6 @@ extern "C" {
 
 /* Generate 80386 code? */
 #@INSERT_I386@ I386_ONLY
-@INSERT_DEFINE_DIRS@
 
 #undef OPENSSL_UNISTD
 #define OPENSSL_UNISTD @INSERT_UNISTD@

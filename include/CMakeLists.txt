@@ -42,15 +42,6 @@ else()
   set(INSERT_I386 undef)
 endif()
 ##########
-set(INSERT_DEFINE_DIRS "
-#if !(defined(VMS) || defined(__VMS)) /* VMS uses logical names instead */
-#if defined(HEADER_CRYPTLIB_H) && !defined(OPENSSLDIR)
-#define ENGINESDIR \"/usr/local/ssl/lib/engines\"
-#define OPENSSLDIR \"/usr/local/ssl\"
-#endif
-#endif"
-  )
-##########
 include(CheckIncludeFile)
 check_include_file(unistd.h HAS_UNISTD_H_OSSL)
 if(HAS_UNISTD_H_OSSL)
