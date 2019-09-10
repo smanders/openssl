@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.12)
 project(openssl)
 include(flags OPTIONAL)
 ########################################
@@ -10,20 +10,9 @@ if(WIN32 AND NOT CYGWIN)
   add_definitions(-DWIN32_LEAN_AND_MEAN)
 endif()
 ########################################
-# headers to openssl (for build)
-add_custom_command(OUTPUT ossl_hdrs_cmd
-  COMMAND ${CMAKE_COMMAND} -Dsrc:STRING="e_os2.h"
-    -DsrcDir:PATH=${openssl_SOURCE_DIR}
-    -Ddst:PATH=${CMAKE_BINARY_DIR}/openssl -P ${openssl_SOURCE_DIR}/cpln.cmake
-  )
-add_custom_target(ossl_hdrs DEPENDS ossl_hdrs_cmd SOURCES cpln.cmake)
-set_property(TARGET ossl_hdrs PROPERTY FOLDER openssl_h)
-########################################
 function(compareCmakeFilesys files)
   file(GLOB_RECURSE filesys RELATIVE ${CMAKE_CURRENT_LIST_DIR} *)
-  # the git repo is littered with .cvsignore files (which the tarball doesn't have)
-  # the tar.gz file has a crypto/opensslconf.h file (which the git repo doesn't have)
-  file(GLOB_RECURSE ignorefiles RELATIVE ${CMAKE_CURRENT_LIST_DIR} .cvsignore opensslconf.h)
+  file(GLOB_RECURSE ignorefiles RELATIVE ${CMAKE_CURRENT_LIST_DIR} .*.swp)
   if(ignorefiles)
     list(REMOVE_ITEM filesys ${ignorefiles})
   endif()
@@ -48,16 +37,14 @@ if(DEFINED OPENSSL_VER)
 endif()
 set(targetsFile ${PROJECT_NAME}${ver}-targets)
 ########################################
+add_subdirectory(include)
 add_subdirectory(crypto)
 add_subdirectory(ssl)
-install(FILES e_os2.h DESTINATION include${verDir}/${PROJECT_NAME})
-set(misc
-  FAQ
-  LICENSE
-  PROBLEMS
-  README
-  README.ASN1
-  README.ENGINE
-  )
-install(FILES ${misc} DESTINATION share${verDir}/openssl)
+if(FALSE)
+# TODO EXPORT of STATIC library with PRIVATE non-target dependencies broken
+# https://gitlab.kitware.com/cmake/cmake/issues/17357
+# I'm seeing the same error reported in this issue, even with EXPORT_LINK_INTERFACE_LIBRARIES
+install(EXPORT ${targetsFile} DESTINATION lib/cmake EXPORT_LINK_INTERFACE_LIBRARIES)
+else()
 install(EXPORT ${targetsFile} DESTINATION lib/cmake)
+endif()

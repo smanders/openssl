@@ -23,6 +23,7 @@
 # include <openssl/buffer.h>
 # include <openssl/bio.h>
 # include <openssl/err.h>
+# include <openssl/opensslconf.h>
 # include "internal/nelem.h"
 
 #ifdef NDEBUG
