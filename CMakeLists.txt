@@ -3,11 +3,17 @@ project(openssl)
 include(flags OPTIONAL)
 ########################################
 set_property(GLOBAL PROPERTY USE_FOLDERS ON) # enables MSVC Solution Folders
-add_definitions(-DOPENSSL_NO_ASM)
-add_definitions(-DOPENSSL_THREADS -D_REENTRANT)
+add_definitions(
+  -DOPENSSL_NO_ASM
+  -DOPENSSL_THREADS
+  -D_REENTRANT
+  )
 if(WIN32 AND NOT CYGWIN)
-  add_definitions(-DOPENSSL_SYSNAME_WIN32)
-  add_definitions(-DWIN32_LEAN_AND_MEAN)
+  add_definitions(
+    -DWIN32_LEAN_AND_MEAN
+    -D_CRT_SECURE_NO_WARNINGS
+    -D_WINSOCK_DEPRECATED_NO_WARNINGS
+    )
 endif()
 ########################################
 function(compareCmakeFilesys files)

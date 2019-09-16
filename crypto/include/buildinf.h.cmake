@@ -19,6 +19,5 @@
  * workaround for the situation where CFLAGS gets too long for a C90 string
  * literal
  */
-static const char compiler_flags[] = {
-@BUILDINF_COMPILER_FLAGS@
+static const char compiler_flags[] = {@BUILDINF_COMPILER_FLAGS@
 };
