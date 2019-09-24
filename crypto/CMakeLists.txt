@@ -1685,6 +1685,9 @@ target_include_directories(${lib_name} PRIVATE
   ec/curve448/arch_32
   modes # evp includes modes_lcl.h
   )
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+target_link_libraries(${lib_name} Threads::Threads ${CMAKE_DL_LIBS})
 if(FALSE)
 # TODO: EXPORT of STATIC library with PRIVATE non-target dependencies broken
 # https://gitlab.kitware.com/cmake/cmake/issues/17357
