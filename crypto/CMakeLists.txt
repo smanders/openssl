@@ -1688,7 +1688,10 @@ target_include_directories(${lib_name} PRIVATE
   ec/curve448
   ec/curve448/arch_32
   modes # evp includes modes_lcl.h
+  PUBLIC
+  $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include${verDir}>
   )
+target_compile_definitions(${lib_name} PUBLIC $<INSTALL_INTERFACE:OPENSSL_API_COMPAT=0x10100000L>)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 target_link_libraries(${lib_name} Threads::Threads ${CMAKE_DL_LIBS})

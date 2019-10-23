@@ -48,11 +48,14 @@ set(targetsFile ${PROJECT_NAME}${ver}-targets)
 add_subdirectory(include)
 add_subdirectory(crypto)
 add_subdirectory(ssl)
+if(DEFINED XP_NAMESPACE)
+  set(nameSpace NAMESPACE ${XP_NAMESPACE}::)
+endif()
 if(FALSE)
 # TODO EXPORT of STATIC library with PRIVATE non-target dependencies broken
 # https://gitlab.kitware.com/cmake/cmake/issues/17357
 # I'm seeing the same error reported in this issue, even with EXPORT_LINK_INTERFACE_LIBRARIES
-install(EXPORT ${targetsFile} DESTINATION lib/cmake EXPORT_LINK_INTERFACE_LIBRARIES)
+install(EXPORT ${targetsFile} DESTINATION lib/cmake ${nameSpace} EXPORT_LINK_INTERFACE_LIBRARIES)
 else()
-install(EXPORT ${targetsFile} DESTINATION lib/cmake)
+install(EXPORT ${targetsFile} DESTINATION lib/cmake ${nameSpace})
 endif()
