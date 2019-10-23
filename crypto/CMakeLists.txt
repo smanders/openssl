@@ -16,16 +16,6 @@ ${CONF}"
   )
 file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/opensslconf.h "${CONF}")
 ########################################
-include_directories(
-  ${CMAKE_CURRENT_BINARY_DIR} # buildinf.h
-  ${openssl_SOURCE_DIR}
-  ${openssl_BINARY_DIR}       # openssl/*.h
-  ${CMAKE_CURRENT_SOURCE_DIR}
-  asn1  # cmac includes asn1_locl.h
-  evp   # cmac includes evp_locl.h
-  modes # evp includes modes_lcl.h
-  )
-########################################
 # library sources
 ####################
 # root
@@ -2070,6 +2060,18 @@ set_property(TARGET ${lib_name}_hdrs PROPERTY FOLDER openssl_h)
 ########################################
 # library
 add_library(${lib_name} STATIC ${${lib_name}_libsrcs})
+target_include_directories(${lib_name} PRIVATE
+  ${CMAKE_CURRENT_BINARY_DIR} # buildinf.h
+  ${openssl_SOURCE_DIR}
+  ${openssl_BINARY_DIR}       # openssl/*.h
+  ${CMAKE_CURRENT_SOURCE_DIR}
+  asn1  # cmac includes asn1_locl.h
+  evp   # cmac includes evp_locl.h
+  modes # evp includes modes_lcl.h
+  PUBLIC
+  $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include${verDir}>
+  )
+target_compile_definitions(${lib_name} PUBLIC $<INSTALL_INTERFACE:OPENSSL_API_COMPAT=0x10000000L>)
 set_target_properties(${lib_name} PROPERTIES OUTPUT_NAME ${lib_name}${ver})
 add_dependencies(${lib_name} ${lib_name}_hdrs ssl_hdrs)
 ########################################

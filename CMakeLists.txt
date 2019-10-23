@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.12)
 project(openssl)
 include(flags OPTIONAL)
 ########################################
@@ -23,7 +23,7 @@ function(compareCmakeFilesys files)
   file(GLOB_RECURSE filesys RELATIVE ${CMAKE_CURRENT_LIST_DIR} *)
   # the git repo is littered with .cvsignore files (which the tarball doesn't have)
   # the tar.gz file has a crypto/opensslconf.h file (which the git repo doesn't have)
-  file(GLOB_RECURSE ignorefiles RELATIVE ${CMAKE_CURRENT_LIST_DIR} .cvsignore opensslconf.h)
+  file(GLOB_RECURSE ignorefiles RELATIVE ${CMAKE_CURRENT_LIST_DIR} .cvsignore opensslconf.h .*.swp)
   if(ignorefiles)
     list(REMOVE_ITEM filesys ${ignorefiles})
   endif()
@@ -60,4 +60,7 @@ set(misc
   README.ENGINE
   )
 install(FILES ${misc} DESTINATION share${verDir}/openssl)
-install(EXPORT ${targetsFile} DESTINATION lib/cmake)
+if(DEFINED XP_NAMESPACE)
+  set(nameSpace NAMESPACE ${XP_NAMESPACE}::)
+endif()
+install(EXPORT ${targetsFile} DESTINATION lib/cmake ${nameSpace})
