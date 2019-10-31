@@ -136,7 +136,6 @@ set(aes_extra
   aes/aes_x86core.c
   )
 list(APPEND aes_extra # TODO asm
-  aes/asm/aes-586.pl
   aes/asm/aes-armv4.pl
   aes/asm/aes-c64xplus.pl
   aes/asm/aesfx-sparcv9.pl
@@ -154,9 +153,7 @@ list(APPEND aes_extra # TODO asm
   aes/asm/aes-sparcv9.pl
   aes/asm/aest4-sparcv9.pl
   aes/asm/aesv8-armx.pl
-  aes/asm/aes-x86_64.pl
   aes/asm/bsaes-armv7.pl
-  aes/asm/bsaes-x86_64.pl
   aes/asm/vpaes-armv8.pl
   aes/asm/vpaes-ppc.pl
   aes/asm/vpaes-x86_64.pl
