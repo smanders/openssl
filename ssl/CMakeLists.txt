@@ -84,17 +84,6 @@ source_group(statem FILES ${statem_srcs})
 list(APPEND ${lib_name}_libsrcs ${statem_srcs})
 ########################################
 add_library(${lib_name} STATIC ${${lib_name}_libsrcs})
-if(FALSE) # cmake bugs with INTERFACE library
-# TODO: EXPORT of STATIC library with PRIVATE non-target dependencies broken
-# https://gitlab.kitware.com/cmake/cmake/issues/17357
-# I'm seeing the same error reported in this issue
-target_link_libraries(${lib_name} PRIVATE include)
-else()
-target_include_directories(${lib_name} PRIVATE
-  ${CMAKE_SOURCE_DIR}/include
-  ${CMAKE_BINARY_DIR}/include # e_os.h, openssl/opensslconf.h
-  )
-endif()
 target_link_libraries(${lib_name} PUBLIC crypto)
 set_target_properties(${lib_name} PROPERTIES OUTPUT_NAME ${lib_name}${ver})
 ########################################

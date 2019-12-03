@@ -208,18 +208,18 @@ set(openssl_srcs
 source_group(openssl FILES ${openssl_srcs})
 list(APPEND ${lib_name}_libsrcs ${openssl_srcs})
 ########################################
-if(FALSE)
 add_library(${lib_name} INTERFACE)
+if(FALSE)
 # TODO: it appears cmake 3.13 has a fix for the target_sources() call to work
 # https://cmake.org/pipermail/cmake/2016-July/063896.html
 target_sources(${lib_name} INTERFACE ${${lib_name}_libsrcs})
+else()
+add_custom_target(${lib_name}Sources SOURCES ${${lib_name}_libsrcs})
+endif()
 target_include_directories(${lib_name} INTERFACE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
   $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}> # e_os.h, openssl/opensslconf.h
   )
-else()
-add_custom_target(${lib_name} SOURCES ${${lib_name}_libsrcs})
-endif()
 # don't install the following...
 list(REMOVE_ITEM openssl_srcs
   openssl/__DECC_INCLUDE_EPILOGUE.H
