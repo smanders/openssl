@@ -2,7 +2,11 @@ set(lib_name crypto)
 ########################################
 set(gen_file include/buildinf.h)
 set(BUILDINF_PLATFORM ${CMAKE_SYSTEM_NAME})
-string(TIMESTAMP BUILDINF_DATE "%a %b %d %H:%M:%S %Y UTC" UTC)
+if(DEFINED OPENSSL_VER) # passed in via externpro
+  string(TIMESTAMP BUILDINF_DATE "%a %b %d %H:%M:%S %Y UTC" UTC)
+else()
+  string(TIMESTAMP BUILDINF_DATE "%a %b %d %Y UTC" UTC)
+endif()
 set(compilerFlags "compiler: ") #"${CMAKE_C_COMPILER} ${CMAKE_CXX_FLAGS}"
 string(LENGTH ${compilerFlags} lenFlags)
 math(EXPR maxPos ${lenFlags}-1)
