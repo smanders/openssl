@@ -11,6 +11,7 @@ add_definitions(
 if(WIN32)
   add_definitions(
     -DOPENSSL_SYS_WIN32
+    -DOPENSSL_NO_AFALGENG
     -DWIN32_LEAN_AND_MEAN
     -DUNICODE -D_UNICODE
     -D_CRT_SECURE_NO_DEPRECATE
@@ -52,11 +53,4 @@ add_subdirectory(test)
 if(DEFINED XP_NAMESPACE)
   set(nameSpace NAMESPACE ${XP_NAMESPACE}::)
 endif()
-if(FALSE)
-# TODO EXPORT of STATIC library with PRIVATE non-target dependencies broken
-# https://gitlab.kitware.com/cmake/cmake/issues/17357
-# I'm seeing the same error reported in this issue, even with EXPORT_LINK_INTERFACE_LIBRARIES
-install(EXPORT ${targetsFile} DESTINATION lib/cmake ${nameSpace} EXPORT_LINK_INTERFACE_LIBRARIES)
-else()
 install(EXPORT ${targetsFile} DESTINATION lib/cmake ${nameSpace})
-endif()

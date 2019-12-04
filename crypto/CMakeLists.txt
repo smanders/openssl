@@ -1696,6 +1696,11 @@ target_compile_definitions(${lib_name} PUBLIC $<INSTALL_INTERFACE:OPENSSL_API_CO
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 target_link_libraries(${lib_name} PUBLIC $<BUILD_INTERFACE:include> PRIVATE Threads::Threads ${CMAKE_DL_LIBS})
+include(CheckLibraryExists)
+check_library_exists(ws2_32 getch "" CRYPTO_HAS_WS2_32)
+if(CRYPTO_HAS_WS2_32)
+  target_link_libraries(${lib_name} PRIVATE ws2_32)
+endif()
 set_target_properties(${lib_name} PROPERTIES OUTPUT_NAME ${lib_name}${ver})
 ########################################
 install(TARGETS ${lib_name} EXPORT ${targetsFile}

@@ -1,3 +1,4 @@
+set(folder test)
 ########################################
 # tests that depend on include
 foreach(t
@@ -6,6 +7,7 @@ foreach(t
   )
   add_executable(${t} ${t}.c)
   target_link_libraries(${t} PRIVATE include)
+  set_property(TARGET ${t} PROPERTY FOLDER ${folder})
   list(APPEND test_srcs ${t}.c)
 endforeach()
 target_include_directories(shlibloadtest PRIVATE ${CMAKE_BINARY_DIR}/crypto/include)
@@ -19,6 +21,7 @@ foreach(t
   )
   add_executable(${t} ${t}.c)
   target_link_libraries(${t} PRIVATE crypto)
+  set_property(TARGET ${t} PROPERTY FOLDER ${folder})
   list(APPEND test_srcs ${t}.c)
 endforeach()
 ########################################
@@ -28,6 +31,7 @@ foreach(t
   )
   add_executable(${t} ${t}.c)
   target_link_libraries(${t} PRIVATE ssl)
+  set_property(TARGET ${t} PROPERTY FOLDER ${folder})
   list(APPEND test_srcs ${t}.c)
 endforeach()
 ########################################
@@ -51,6 +55,7 @@ set(testutil_srcs
   )
 add_library(testutil STATIC ${testutil_srcs})
 target_link_libraries(testutil PUBLIC crypto)
+set_property(TARGET testutil PROPERTY FOLDER ${folder})
 list(APPEND test_srcs ${testutil_srcs})
 ########################################
 # tests that depend on testutil
@@ -124,6 +129,7 @@ foreach(t
   )
   add_executable(${t} ${t}.c)
   target_link_libraries(${t} PRIVATE testutil)
+  set_property(TARGET ${t} PROPERTY FOLDER ${folder})
   list(APPEND test_srcs ${t}.c)
 endforeach()
 ########################################
@@ -143,6 +149,7 @@ foreach(t
   )
   add_executable(${t} ${t}.c)
   target_link_libraries(${t} PRIVATE testutil ssl)
+  set_property(TARGET ${t} PROPERTY FOLDER ${folder})
   list(APPEND test_srcs ${t}.c)
 endforeach()
 ########################################
@@ -153,6 +160,7 @@ set(ssltestlib_srcs
   )
 add_library(ssltestlib STATIC ${ssltestlib_srcs})
 target_link_libraries(ssltestlib PUBLIC testutil ssl)
+set_property(TARGET ssltestlib PROPERTY FOLDER ${folder})
 list(APPEND test_srcs ${ssltestlib_srcs})
 ####################
 # tests that depend on ssltestlib
@@ -171,6 +179,7 @@ foreach(t
   )
   add_executable(${t} ${t}.c)
   target_link_libraries(${t} PRIVATE ssltestlib)
+  set_property(TARGET ${t} PROPERTY FOLDER ${folder})
   list(APPEND test_srcs ${t}.c)
 endforeach()
 ########################################
@@ -190,6 +199,7 @@ foreach(t
   add_executable(${t} ${t}.c)
   target_link_libraries(${t} PRIVATE testutil)
   target_include_directories(${t} PRIVATE ${CMAKE_SOURCE_DIR}/crypto/include)
+  set_property(TARGET ${t} PROPERTY FOLDER ${folder})
   list(APPEND test_srcs ${t}.c)
 endforeach()
 target_include_directories(curve448_internal_test PRIVATE ${CMAKE_SOURCE_DIR}/crypto/ec/curve448)
@@ -248,6 +258,7 @@ foreach(t
   )
   add_executable(${t} ${${t}_srcs})
   target_link_libraries(${t} PRIVATE ${${t}_libs})
+  set_property(TARGET ${t} PROPERTY FOLDER ${folder})
   list(APPEND test_srcs ${${t}_srcs})
 endforeach()
 ########################################
