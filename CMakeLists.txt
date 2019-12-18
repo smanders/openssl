@@ -3,21 +3,65 @@ project(openssl)
 include(flags OPTIONAL)
 ########################################
 set_property(GLOBAL PROPERTY USE_FOLDERS ON) # enables MSVC Solution Folders
-add_definitions(
-  -DOPENSSL_NO_ASM
-  -DOPENSSL_THREADS
+set(OPENSSL_DEFS
   -D_REENTRANT
+  -DL_ENDIAN
+  -DOPENSSL_PIC
   )
 if(WIN32)
-  add_definitions(
+  list(APPEND OPENSSL_DEFS
     -DOPENSSL_SYS_WIN32
-    -DOPENSSL_NO_AFALGENG
     -DWIN32_LEAN_AND_MEAN
     -DUNICODE -D_UNICODE
     -D_CRT_SECURE_NO_DEPRECATE
     -D_WINSOCK_DEPRECATED_NO_WARNINGS
     )
+  set(asmDir asmfromnode/archs/VC-WIN64A/asm)
+elseif(UNIX)
+  list(APPEND OPENSSL_DEFS
+    -DOPENSSL_USE_NODELETE
+    )
+  set(asmDir asmfromnode/archs/linux-x86_64/asm)
 endif()
+if(EXISTS ${CMAKE_SOURCE_DIR}/${asmDir} AND IS_DIRECTORY ${CMAKE_SOURCE_DIR}/${asmDir})
+  set(ASM_BUILD TRUE)
+  list(APPEND OPENSSL_DEFS
+    -DOPENSSL_CPUID_OBJ
+    -DOPENSSL_IA32_SSE2
+    -DOPENSSL_BN_ASM_MONT
+    -DOPENSSL_BN_ASM_GF2m
+    -DSHA1_ASM # must define L_ENDIAN for x86
+    -DSHA256_ASM
+    -DSHA512_ASM
+    -DRC4_ASM
+    -DMD5_ASM
+    -DVPAES_ASM
+    -DGHASH_ASM
+    -DECP_NISTZ256_ASM
+    -DPOLY1305_ASM
+    )
+  if(WIN32)
+    list(APPEND OPENSSL_DEFS
+      -DOPENSSL_BN_ASM_PART_WORDS
+      -DRMD160_ASM
+      -DAES_ASM
+      -DWHIRLPOOL_ASM
+      -DPADLOCK_ASM
+      )
+  elseif(UNIX)
+    list(APPEND OPENSSL_DEFS
+      -DOPENSSL_BN_ASM_MONT5
+      -DKECCAK1600_ASM
+      -DX25519_ASM
+      )
+  endif()
+else()
+  set(ASM_BUILD FALSE)
+  list(APPEND OPENSSL_DEFS
+    -DOPENSSL_NO_ASM
+    )
+endif()
+add_definitions(${OPENSSL_DEFS})
 ########################################
 function(compareCmakeFilesys files)
   file(GLOB_RECURSE filesys RELATIVE ${CMAKE_CURRENT_LIST_DIR} *)
@@ -35,6 +79,13 @@ function(compareCmakeFilesys files)
   if(filesys)
     message(FATAL_ERROR "files not in cmake: ${filesys}")
   endif()
+  foreach(f ${files})
+    get_filename_component(absPath ${f} ABSOLUTE)
+    if(NOT absPath MATCHES CMAKE_CURRENT_LIST_DIR)
+      # remove any files that aren't under CMAKE_CURRENT_LIST_DIR
+      list(REMOVE_ITEM files ${f})
+    endif()
+  endforeach()
   if(files)
     message(FATAL_ERROR "files not in repo, but in cmake: ${files}")
   endif()

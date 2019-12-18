@@ -8,10 +8,12 @@ set(INSERT_WARNING
 # ./configure; perl configdata.pm --dump
 # Disable features
 set(OPENSSL_DEFINES
+  #OPENSSL_NO_COMP
   #OPENSSL_NO_MD2
   #OPENSSL_NO_RC5
   OPENSSL_THREADS
   OPENSSL_RAND_SEED_OS
+  OPENSSL_NO_AFALGENG
   OPENSSL_NO_ASAN
   OPENSSL_NO_CRYPTO_MDEBUG
   OPENSSL_NO_CRYPTO_MDEBUG_BACKTRACE
@@ -30,6 +32,7 @@ set(OPENSSL_DEFINES
   OPENSSL_NO_UBSAN
   OPENSSL_NO_UNIT_TEST
   OPENSSL_NO_WEAK_SSL_CIPHERS
+  #OPENSSL_NO_DYNAMIC_ENGINE
   OPENSSL_NO_STATIC_ENGINE
   )
 foreach(def ${OPENSSL_DEFINES})
@@ -59,8 +62,14 @@ else()
 endif()
 ##########
 # only one for the following should be defined
-set(INSERT_SIXTY_FOUR_BIT_LONG define)
-set(INSERT_SIXTY_FOUR_BIT undef)
+# TRICKY matches crypto/bn_conf.h
+if(WIN32)
+  set(INSERT_SIXTY_FOUR_BIT_LONG undef)
+  set(INSERT_SIXTY_FOUR_BIT define)
+elseif(UNIX)
+  set(INSERT_SIXTY_FOUR_BIT_LONG define)
+  set(INSERT_SIXTY_FOUR_BIT undef)
+endif()
 set(INSERT_THIRTY_TWO_BIT undef)
 ##########
 set(INSERT_RC4_INT "unsigned int")
