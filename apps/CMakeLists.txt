@@ -203,10 +203,20 @@ set(apps_openssl_src
   rehash.c
   storeutl.c
   )
+if(WIN32)
+  list(APPEND apps_openssl_src
+    win32_init.c
+    )
+else()
+  list(APPEND apps_srcs
+    win32_init.c
+    )
+endif()
 source_group("" FILES ${apps_openssl_src})
 add_executable(openssl ${apps_openssl_src})
 target_include_directories(openssl PRIVATE ${CMAKE_CURRENT_BINARY_DIR}) # progs.h
 target_link_libraries(openssl PRIVATE apps ssl)
+set_property(TARGET openssl PROPERTY FOLDER ${folder})
 list(APPEND apps_srcs ${apps_openssl_src})
 ########################################
 # directories (ignore -- add to cmake)
@@ -262,7 +272,6 @@ list(APPEND apps_srcs
   vms_decc_init.c
   vms_term_sock.c
   vms_term_sock.h
-  win32_init.c
   )
 ########################################
 compareCmakeFilesys("${apps_srcs}")
