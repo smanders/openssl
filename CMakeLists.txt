@@ -7,6 +7,8 @@ set(OPENSSL_DEFS
   -D_REENTRANT
   -DL_ENDIAN
   -DOPENSSL_PIC
+  -DOPENSSLDIR=\"/etc/ssl\"
+  -DENGINESDIR=\"/dev/null\"
   )
 if(WIN32)
   list(APPEND OPENSSL_DEFS

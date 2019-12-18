@@ -53,13 +53,6 @@ DEFINE_LHASH_OF(MEM);
 
 # define OPENSSL_CONF             "openssl.cnf"
 
-# if !(defined(VMS) || defined(__VMS)) /* VMS uses logical names instead */
-#  if defined(HEADER_CRYPTLIB_H) && !defined(OPENSSLDIR)
-#   define ENGINESDIR "/usr/local/ssl/lib/engines"
-#   define OPENSSLDIR "/usr/local/ssl"
-#  endif
-# endif
-
 # ifndef OPENSSL_SYS_VMS
 #  define X509_CERT_AREA          OPENSSLDIR
 #  define X509_CERT_DIR           OPENSSLDIR "/certs"
