@@ -25,6 +25,9 @@ elseif(UNIX)
     )
   set(asmDir asmfromnode/archs/linux-x86_64/asm)
 endif()
+if((CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64" OR CMAKE_SYSTEM_PROCESSOR MATCHES "AMD64") AND WIN32)
+  enable_language(ASM_NASM) # -DCMAKE_ASM_NASM_COMPILER=/path/to/nasm.exe
+endif()
 if(EXISTS ${CMAKE_SOURCE_DIR}/${asmDir} AND IS_DIRECTORY ${CMAKE_SOURCE_DIR}/${asmDir})
   set(ASM_BUILD TRUE)
   list(APPEND OPENSSL_DEFS
@@ -44,7 +47,6 @@ if(EXISTS ${CMAKE_SOURCE_DIR}/${asmDir} AND IS_DIRECTORY ${CMAKE_SOURCE_DIR}/${a
     )
   if(WIN32)
     list(APPEND OPENSSL_DEFS
-      -DOPENSSL_BN_ASM_PART_WORDS
       -DRMD160_ASM
       -DAES_ASM
       -DWHIRLPOOL_ASM
