@@ -153,7 +153,7 @@ list(APPEND aes_srcs
   aes/aes_locl.h
   aes/aes_core.c # aes_asm_src DEFAULT (Configurations/00-base-templates.conf)
   aes/aes_cbc.c # aes_asm_src DEFAULT (Configurations/00-base-templates.conf)
-  aes/aes_x86core.c
+  aes/aes_x86core.c # needed on msw: unresolved external symbol AES_[en|de]crypt
   )
 source_group(aes FILES ${aes_srcs})
 list(APPEND ${lib_name}_libsrcs ${aes_srcs})
@@ -404,12 +404,20 @@ set(bn_srcs # order from crypto/bn/build.info
 list(APPEND bn_srcs
   bn/bn_lcl.h
   bn/bn_prime.h
-  bn/bn_asm.c # bn_asm_src DEFAULT (Configurations/00-base-templates.conf)
   )
+if(NOT ASM_BUILD)
+  list(APPEND bn_srcs
+    bn/bn_asm.c # bn_asm_src DEFAULT (Configurations/00-base-templates.conf)
+    )
+else()
+  set(bn_extra
+    bn/bn_asm.c
+    )
+endif()
 source_group(bn FILES ${bn_srcs})
 list(APPEND ${lib_name}_libsrcs ${bn_srcs})
 ##########
-set(bn_extra # in directory, not in build.info
+list(APPEND bn_extra # in directory, not in build.info
   bn/bn_prime.pl
   bn/README.pod
   )
@@ -471,15 +479,16 @@ set(camellia_srcs # order from crypto/camellia/build.info
   )
 list(APPEND camellia_srcs
   camellia/cmll_locl.h
-  camellia/camellia.c # cmll_asm_src DEFAULT (Configurations/00-base-templates.conf)
   camellia/cmll_misc.c # cmll_asm_src DEFAULT (Configurations/00-base-templates.conf)
   )
 if(NOT ASM_BUILD)
   list(APPEND camellia_srcs
+    camellia/camellia.c # cmll_asm_src DEFAULT (Configurations/00-base-templates.conf)
     camellia/cmll_cbc.c # cmll_asm_src DEFAULT (Configurations/00-base-templates.conf)
     )
 else()
   list(APPEND camellia_extra
+    camellia/camellia.c
     camellia/cmll_cbc.c
     )
 endif()
@@ -517,12 +526,20 @@ list(APPEND ${lib_name}_all ${cast_extra})
 # chacha
 set(chacha_srcs # order from crypto/chacha/build.info
   chacha/build.info
-  chacha/chacha_enc.c # chacha_asm_src DEFAULT (Configurations/00-base-templates.conf)
   )
+if(NOT ASM_BUILD)
+  list(APPEND chacha_srcs
+    chacha/chacha_enc.c # chacha_asm_src DEFAULT (Configurations/00-base-templates.conf)
+    )
+else()
+  set(chacha_extra
+    chacha/chacha_enc.c
+    )
+endif()
 source_group(chacha FILES ${chacha_srcs})
 list(APPEND ${lib_name}_libsrcs ${chacha_srcs})
 ##########
-set(chacha_extra # TODO asm
+list(APPEND chacha_extra # TODO asm
   chacha/asm/chacha-armv4.pl
   chacha/asm/chacha-armv8.pl
   chacha/asm/chacha-c64xplus.pl
@@ -1312,13 +1329,22 @@ list(APPEND ${lib_name}_libsrcs ${rc2_srcs})
 set(rc4_srcs
   rc4/build.info
   rc4/rc4_locl.h
-  rc4/rc4_enc.c # rc4_asm_src DEFAULT (Configurations/00-base-templates.conf)
-  rc4/rc4_skey.c # rc4_asm_src DEFAULT (Configurations/00-base-templates.conf)
   )
+if(NOT ASM_BUILD)
+  list(APPEND rc4_srcs
+    rc4/rc4_enc.c # rc4_asm_src DEFAULT (Configurations/00-base-templates.conf)
+    rc4/rc4_skey.c # rc4_asm_src DEFAULT (Configurations/00-base-templates.conf)
+    )
+else()
+  set(rc4_extra
+    rc4/rc4_enc.c
+    rc4/rc4_skey.c
+    )
+endif()
 source_group(rc4 FILES ${rc4_srcs})
 list(APPEND ${lib_name}_libsrcs ${rc4_srcs})
 ##########
-set(rc4_extra # TODO asm
+list(APPEND rc4_extra # TODO asm
   rc4/asm/rc4-586.pl
   rc4/asm/rc4-c64xplus.pl
   rc4/asm/rc4-md5-x86_64.pl
@@ -1423,12 +1449,20 @@ set(sha_srcs # order from crypto/sha/Makefile
   )
 list(APPEND sha_srcs
   sha/sha_locl.h
-  sha/keccak1600.c # keccak1600_asm_src DEFAULT (Configurations/00-base-templates.conf)
   )
+if(NOT ASM_BUILD)
+  list(APPEND sha_srcs
+    sha/keccak1600.c # keccak1600_asm_src DEFAULT (Configurations/00-base-templates.conf)
+    )
+else()
+  set(sha_extra
+    sha/keccak1600.c
+    )
+endif()
 source_group(sha FILES ${sha_srcs})
 list(APPEND ${lib_name}_libsrcs ${sha_srcs})
 ##########
-set(sha_extra # TODO asm
+list(APPEND sha_extra # TODO asm
   sha/asm/keccak1600-armv4.pl
   sha/asm/keccak1600-armv8.pl
   sha/asm/keccak1600-avx2.pl
@@ -1602,12 +1636,20 @@ set(whrlpool_srcs # order from crypto/whrlpool/build.info
   )
 list(APPEND whrlpool_srcs
   whrlpool/wp_locl.h
-  whrlpool/wp_block.c # wp_asm_src DEFAULT (Configurations/00-base-templates.conf)
   )
+if(NOT ASM_BUILD)
+  list(APPEND whrlpool_srcs
+    whrlpool/wp_block.c # wp_asm_src DEFAULT (Configurations/00-base-templates.conf)
+    )
+else()
+  set(whrlpool_extra
+    whrlpool/wp_block.c
+    )
+endif()
 source_group(whrlpool FILES ${whrlpool_srcs})
 list(APPEND ${lib_name}_libsrcs ${whrlpool_srcs})
 ##########
-set(whrlpool_extra # TODO asm
+list(APPEND whrlpool_extra # TODO asm
   whrlpool/asm/wp-mmx.pl
   whrlpool/asm/wp-x86_64.pl
   )

@@ -3,6 +3,7 @@ project(openssl)
 include(flags OPTIONAL)
 ########################################
 set_property(GLOBAL PROPERTY USE_FOLDERS ON) # enables MSVC Solution Folders
+# NOTE: attempted to make OPENSSL_DEFS match other build systems (node.js and openssl perl)
 set(OPENSSL_DEFS
   -D_REENTRANT
   -DL_ENDIAN
