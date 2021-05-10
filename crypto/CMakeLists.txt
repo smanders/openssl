@@ -1859,6 +1859,7 @@ add_library(${lib_name} STATIC ${${lib_name}_libsrcs})
 target_include_directories(${lib_name} PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/include
   ${CMAKE_CURRENT_BINARY_DIR}/include # buildinf.h, internal/[bn|dso]_conf.h
+  ${CMAKE_CURRENT_SOURCE_DIR} # arm_arch.h
   ec/curve448
   ec/curve448/arch_32
   modes # evp includes modes_lcl.h

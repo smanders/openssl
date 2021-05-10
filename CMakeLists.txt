@@ -24,7 +24,7 @@ elseif(UNIX)
   list(APPEND OPENSSL_DEFS
     -DOPENSSL_USE_NODELETE
     )
-  set(asmDir asmfromnode/archs/linux-x86_64/asm)
+  set(asmDir asmfromnode/archs/linux-${CMAKE_SYSTEM_PROCESSOR}/asm)
 endif()
 if((CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64" OR CMAKE_SYSTEM_PROCESSOR MATCHES "AMD64") AND WIN32)
   enable_language(ASM_NASM) # -DCMAKE_ASM_NASM_COMPILER=/path/to/nasm.exe
