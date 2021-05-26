@@ -34,9 +34,9 @@ set(root_srcs # order from ssl/build.info
   ssl_utst.c
   )
 list(APPEND root_srcs
-  packet_locl.h
+  packet_local.h
   ssl_cert_table.h
-  ssl_locl.h
+  ssl_local.h
   )
 source_group("" FILES ${root_srcs})
 list(APPEND ${lib_name}_libsrcs ${root_srcs})
@@ -58,7 +58,7 @@ set(record_srcs # order from ssl/build.info
 list(APPEND record_srcs
   record/README
   record/record.h
-  record/record_locl.h
+  record/record_local.h
   )
 source_group(record FILES ${record_srcs})
 list(APPEND ${lib_name}_libsrcs ${record_srcs})
@@ -78,7 +78,7 @@ set(statem_srcs # order from ssl/build.info
 list(APPEND statem_srcs
   statem/README
   statem/statem.h
-  statem/statem_locl.h
+  statem/statem_local.h
   )
 source_group(statem FILES ${statem_srcs})
 list(APPEND ${lib_name}_libsrcs ${statem_srcs})

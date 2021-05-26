@@ -156,7 +156,7 @@ set(internal_srcs
   internal/bio.h
   internal/comp.h
   internal/conf.h
-  internal/constant_time_locl.h
+  internal/constant_time.h
   internal/cryptlib.h
   internal/dane.h
   internal/__DECC_INCLUDE_EPILOGUE.H

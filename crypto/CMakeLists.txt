@@ -119,7 +119,7 @@ set(aes_srcs # order from crypto/aes/build.info
   aes/aes_wrap.c
   )
 list(APPEND aes_srcs
-  aes/aes_locl.h
+  aes/aes_local.h
   aes/aes_core.c # aes_asm_src DEFAULT (Configurations/00-base-templates.conf)
   aes/aes_cbc.c # aes_asm_src DEFAULT (Configurations/00-base-templates.conf)
   aes/aes_x86core.c # needed on msw: unresolved external symbol AES_[en|de]crypt
@@ -231,7 +231,7 @@ set(asn1_srcs # order from crypto/asn1/build.info
   )
 list(APPEND asn1_srcs
   asn1/asn1_item_list.h
-  asn1/asn1_locl.h
+  asn1/asn1_local.h
   asn1/charmap.h
   asn1/charmap.pl
   asn1/standard_methods.h
@@ -248,7 +248,7 @@ set(async_srcs # order from crypto/async/build.info
   async/async_err.c
   )
 list(APPEND async_srcs
-  async/async_locl.h
+  async/async_local.h
   )
 source_group(async FILES ${async_srcs})
 ##########
@@ -274,7 +274,7 @@ set(bf_srcs # order from crypto/bf/build.info
   bf/bf_ofb64.c
   )
 list(APPEND bf_srcs
-  bf/bf_locl.h
+  bf/bf_local.h
   bf/bf_pi.h
   bf/bf_enc.c # bf_asm_src DEFAULT (Configurations/00-base-templates.conf)
   )
@@ -314,7 +314,7 @@ set(bio_srcs # order from crypto/bio/build.info
   bio/bf_lbuf.c
   )
 list(APPEND bio_srcs
-  bio/bio_lcl.h
+  bio/bio_local.h
   )
 source_group(bio FILES ${bio_srcs})
 list(APPEND ${lib_name}_libsrcs ${bio_srcs})
@@ -329,7 +329,7 @@ set(blake2_srcs # order from crypto/blake2/build.info
   )
 list(APPEND blake2_srcs
   blake2/blake2_impl.h
-  blake2/blake2_locl.h
+  blake2/blake2_local.h
   )
 source_group(blake2 FILES ${blake2_srcs})
 list(APPEND ${lib_name}_libsrcs ${blake2_srcs})
@@ -371,7 +371,7 @@ set(bn_srcs # order from crypto/bn/build.info
   bn/rsaz_exp.h
   )
 list(APPEND bn_srcs
-  bn/bn_lcl.h
+  bn/bn_local.h
   bn/bn_prime.h
   )
 if(NOT ASM_BUILD)
@@ -447,7 +447,7 @@ set(camellia_srcs # order from crypto/camellia/build.info
   camellia/cmll_ctr.c
   )
 list(APPEND camellia_srcs
-  camellia/cmll_locl.h
+  camellia/cmll_local.h
   camellia/cmll_misc.c # cmll_asm_src DEFAULT (Configurations/00-base-templates.conf)
   )
 if(NOT ASM_BUILD)
@@ -480,7 +480,7 @@ set(cast_srcs # order from crypto/cast/build.info
   cast/c_ofb64.c
   )
 list(APPEND cast_srcs
-  cast/cast_lcl.h
+  cast/cast_local.h
   cast/cast_s.h
   cast/c_enc.c # cast_asm_src DEFAULT (Configurations/00-base-templates.conf)
   )
@@ -548,7 +548,7 @@ set(cms_srcs # order from crypto/cms/build.info
   cms/cms_kari.c
   )
 list(APPEND cms_srcs
-  cms/cms_lcl.h
+  cms/cms_local.h
   )
 source_group(cms FILES ${cms_srcs})
 list(APPEND ${lib_name}_libsrcs ${cms_srcs})
@@ -561,7 +561,7 @@ set(comp_srcs # order from crypto/comp/build.info
   comp/c_zlib.c
   )
 list(APPEND comp_srcs
-  comp/comp_lcl.h
+  comp/comp_local.h
   )
 source_group(comp FILES ${comp_srcs})
 list(APPEND ${lib_name}_libsrcs ${comp_srcs})
@@ -580,7 +580,7 @@ set(conf_srcs # order from crypto/conf/build.info
   )
 list(APPEND conf_srcs
   conf/conf_def.h
-  conf/conf_lcl.h
+  conf/conf_local.h
   conf/keysets.pl
   )
 source_group(conf FILES ${conf_srcs})
@@ -601,7 +601,7 @@ set(ct_srcs # order from crypto/ct/build.info
   ct/ct_x509v3.c
   )
 list(APPEND ct_srcs
-  ct/ct_locl.h
+  ct/ct_local.h
   )
 source_group(ct FILES ${ct_srcs})
 list(APPEND ${lib_name}_libsrcs ${ct_srcs})
@@ -628,7 +628,7 @@ set(des_srcs # order from crypto/des/build.info
   des/cbc_cksm.c
   )
 list(APPEND des_srcs
-  des/des_locl.h
+  des/des_local.h
   des/spr.h
   des/des_enc.c # des_asm_src DEFAULT (Configurations/00-base-templates.conf)
   des/fcrypt_b.c # des_asm_src DEFAULT (Configurations/00-base-templates.conf)
@@ -667,7 +667,7 @@ set(dh_srcs # order from crypto/dh/build.info
   dh/dh_rfc7919.c
   )
 list(APPEND dh_srcs
-  dh/dh_locl.h
+  dh/dh_local.h
   dh/dh1024.pem
   dh/dh192.pem
   dh/dh2048.pem
@@ -695,7 +695,7 @@ set(dsa_srcs # order from crypto/dsa/build.info
   dsa/dsa_meth.c
   )
 list(APPEND dsa_srcs
-  dsa/dsa_locl.h
+  dsa/dsa_local.h
   )
 source_group(dsa FILES ${dsa_srcs})
 list(APPEND ${lib_name}_libsrcs ${dsa_srcs})
@@ -712,7 +712,7 @@ set(dso_srcs # order from crypto/dso/build.info
   dso/dso_vms.c
   )
 list(APPEND dso_srcs
-  dso/dso_locl.h
+  dso/dso_local.h
   )
 source_group(dso FILES ${dso_srcs})
 list(APPEND ${lib_name}_libsrcs ${dso_srcs})
@@ -754,7 +754,7 @@ set(ec_srcs # order from crypto/ec/build.info
   ec/ecp_nistz256.c # in directory, not in build.info
   )
 list(APPEND ec_srcs
-  ec/ec_lcl.h
+  ec/ec_local.h
   )
 source_group(ec FILES ${ec_srcs})
 ####
@@ -766,7 +766,7 @@ set(ec_curve448_srcs # order from crypto/ec/build.info
   ec/curve448/curve448.c
   )
 list(APPEND ec_curve448_srcs
-  ec/curve448/curve448_lcl.h
+  ec/curve448/curve448_local.h
   ec/curve448/curve448utils.h
   ec/curve448/ed448.h
   ec/curve448/field.h
@@ -830,7 +830,7 @@ set(engine_srcs # order from crypto/engine/build.info
   engine/eng_rdrand.c
   )
 list(APPEND engine_srcs
-  engine/eng_int.h
+  engine/eng_local.h
   engine/README
   )
 source_group(engine FILES ${engine_srcs})
@@ -922,7 +922,7 @@ set(evp_srcs # order from crypto/evp/build.info
   evp/cmeth_lib.c
   )
 list(APPEND evp_srcs
-  evp/evp_locl.h
+  evp/evp_local.h
   )
 source_group(evp FILES ${evp_srcs})
 list(APPEND ${lib_name}_libsrcs ${evp_srcs})
@@ -935,7 +935,7 @@ set(hmac_srcs # order from crypto/hmac/build.info
   hmac/hm_pmeth.c
   )
 list(APPEND hmac_srcs
-  hmac/hmac_lcl.h
+  hmac/hmac_local.h
   )
 source_group(hmac FILES ${hmac_srcs})
 list(APPEND ${lib_name}_libsrcs ${hmac_srcs})
@@ -950,7 +950,7 @@ set(idea_srcs # order from crypto/idea/build.info
   idea/i_skey.c
   )
 list(APPEND idea_srcs
-  idea/idea_lcl.h
+  idea/idea_local.h
   )
 source_group(idea FILES ${idea_srcs})
 list(APPEND ${lib_name}_libsrcs ${idea_srcs})
@@ -973,7 +973,7 @@ set(lhash_srcs # order from crypto/lhash/build.info
   lhash/lh_stats.c
   )
 list(APPEND lhash_srcs
-  lhash/lhash_lcl.h
+  lhash/lhash_local.h
   )
 source_group(lhash FILES ${lhash_srcs})
 list(APPEND ${lib_name}_libsrcs ${lhash_srcs})
@@ -994,7 +994,7 @@ set(md4_srcs # order from crypto/md4/build.info
   md4/md4_one.c
   )
 list(APPEND md4_srcs
-  md4/md4_locl.h
+  md4/md4_local.h
   )
 source_group(md4 FILES ${md4_srcs})
 list(APPEND ${lib_name}_libsrcs ${md4_srcs})
@@ -1006,7 +1006,7 @@ set(md5_srcs # order from crypto/md5/build.info
   md5/md5_one.c
   )
 list(APPEND md5_srcs
-  md5/md5_locl.h
+  md5/md5_local.h
   )
 source_group(md5 FILES ${md5_srcs})
 list(APPEND ${lib_name}_libsrcs ${md5_srcs})
@@ -1042,7 +1042,7 @@ set(modes_srcs # order from crypto/modes/build.info
   modes/ocb128.c
   )
 list(APPEND modes_srcs
-  modes/modes_lcl.h
+  modes/modes_local.h
   )
 source_group(modes FILES ${modes_srcs})
 list(APPEND ${lib_name}_libsrcs ${modes_srcs})
@@ -1074,7 +1074,7 @@ set(objects_srcs # order from crypto/objects/build.info
   )
 list(APPEND objects_srcs
   objects/obj_dat.h
-  objects/obj_lcl.h
+  objects/obj_local.h
   objects/obj_xref.h
   objects/obj_dat.pl
   objects/objects.pl
@@ -1102,7 +1102,7 @@ set(ocsp_srcs # order from crypto/ocsp/build.info
   ocsp/v3_ocsp.c
   )
 list(APPEND ocsp_srcs
-  ocsp/ocsp_lcl.h
+  ocsp/ocsp_local.h
   )
 source_group(ocsp FILES ${ocsp_srcs})
 list(APPEND ${lib_name}_libsrcs ${ocsp_srcs})
@@ -1162,7 +1162,7 @@ set(pkcs12_srcs # order from crypto/pkcs12/build.info
   pkcs12/p12_p8e.c
   )
 list(APPEND pkcs12_srcs
-  pkcs12/p12_lcl.h
+  pkcs12/p12_local.h
   )
 source_group(pkcs12 FILES ${pkcs12_srcs})
 list(APPEND ${lib_name}_libsrcs ${pkcs12_srcs})
@@ -1227,7 +1227,7 @@ set(rand_srcs # order from crypto/rand/build.info
   rand/drbg_ctr.c
   )
 list(APPEND rand_srcs
-  rand/rand_lcl.h
+  rand/rand_local.h
   )
 source_group(rand FILES ${rand_srcs})
 list(APPEND ${lib_name}_libsrcs ${rand_srcs})
@@ -1242,7 +1242,7 @@ set(rc2_srcs # order from crypto/rc2/build.info
   rc2/rc2ofb64.c
   )
 list(APPEND rc2_srcs
-  rc2/rc2_locl.h
+  rc2/rc2_local.h
   )
 source_group(rc2 FILES ${rc2_srcs})
 list(APPEND ${lib_name}_libsrcs ${rc2_srcs})
@@ -1250,7 +1250,7 @@ list(APPEND ${lib_name}_libsrcs ${rc2_srcs})
 # rc4
 set(rc4_srcs
   rc4/build.info
-  rc4/rc4_locl.h
+  rc4/rc4_local.h
   )
 if(NOT ASM_BUILD)
   list(APPEND rc4_srcs
@@ -1285,7 +1285,7 @@ set(rc5_srcs # order from crypto/rc5/build.info
   rc5/rc5ofb64.c
   )
 list(APPEND rc5_srcs
-  rc5/rc5_locl.h
+  rc5/rc5_local.h
   rc5/rc5_enc.c # rc5_asm_src DEFAULT (Configurations/00-base-templates.conf)
   )
 source_group(rc5 FILES ${rc5_srcs})
@@ -1303,7 +1303,7 @@ set(ripemd_srcs # order from crypto/ripemd/build.info
   ripemd/rmd_one.c
   )
 list(APPEND ripemd_srcs
-  ripemd/rmd_locl.h
+  ripemd/rmd_local.h
   ripemd/rmdconst.h
   )
 source_group(ripemd FILES ${ripemd_srcs})
@@ -1341,7 +1341,7 @@ set(rsa_srcs # order from crypto/rsa/build.info
   rsa/rsa_mp.c
   )
 list(APPEND rsa_srcs
-  rsa/rsa_locl.h
+  rsa/rsa_local.h
   )
 source_group(rsa FILES ${rsa_srcs})
 list(APPEND ${lib_name}_libsrcs ${rsa_srcs})
@@ -1356,7 +1356,7 @@ set(seed_srcs # order from crypto/seed/build.info
   seed/seed_ofb.c
   )
 list(APPEND seed_srcs
-  seed/seed_locl.h
+  seed/seed_local.h
   )
 source_group(seed FILES ${seed_srcs})
 list(APPEND ${lib_name}_libsrcs ${seed_srcs})
@@ -1370,7 +1370,7 @@ set(sha_srcs # order from crypto/sha/Makefile
   sha/sha512.c
   )
 list(APPEND sha_srcs
-  sha/sha_locl.h
+  sha/sha_local.h
   )
 if(NOT ASM_BUILD)
   list(APPEND sha_srcs
@@ -1461,7 +1461,7 @@ set(sm3_srcs # order from crypto/sm3/build.info
   sm3/m_sm3.c
   )
 list(APPEND sm3_srcs
-  sm3/sm3_locl.h
+  sm3/sm3_local.h
   )
 source_group(sm3 FILES ${sm3_srcs})
 list(APPEND ${lib_name}_libsrcs ${sm3_srcs})
@@ -1502,7 +1502,7 @@ set(store_srcs # order from crypto/store/build.info
   store/loader_file.c
   )
 list(APPEND store_srcs
-  store/store_locl.h
+  store/store_local.h
   )
 source_group(store FILES ${store_srcs})
 list(APPEND ${lib_name}_libsrcs ${store_srcs})
@@ -1523,7 +1523,7 @@ set(ts_srcs # order from crypto/ts/build.info
   ts/ts_asn1.c
   )
 list(APPEND ts_srcs
-  ts/ts_lcl.h
+  ts/ts_local.h
   )
 source_group(ts FILES ${ts_srcs})
 list(APPEND ${lib_name}_libsrcs ${ts_srcs})
@@ -1546,7 +1546,7 @@ set(ui_srcs # order from crypto/ui/build.info
   ui/ui_util.c
   )
 list(APPEND ui_srcs
-  ui/ui_locl.h
+  ui/ui_local.h
   )
 source_group(ui FILES ${ui_srcs})
 list(APPEND ${lib_name}_libsrcs ${ui_srcs})
@@ -1557,7 +1557,7 @@ set(whrlpool_srcs # order from crypto/whrlpool/build.info
   whrlpool/wp_dgst.c
   )
 list(APPEND whrlpool_srcs
-  whrlpool/wp_locl.h
+  whrlpool/wp_local.h
   )
 if(NOT ASM_BUILD)
   list(APPEND whrlpool_srcs
@@ -1618,7 +1618,7 @@ set(x509_srcs # order from crypto/x509/build.info
   x509/x_name.c
   )
 list(APPEND x509_srcs
-  x509/x509_lcl.h
+  x509/x509_local.h
   )
 source_group(x509 FILES ${x509_srcs})
 list(APPEND ${lib_name}_libsrcs ${x509_srcs})
@@ -1666,7 +1666,7 @@ set(x509v3_srcs # order from crypto/x509v3/build.info
   )
 list(APPEND x509v3_srcs
   x509v3/ext_dat.h
-  x509v3/pcy_int.h
+  x509v3/pcy_local.h
   x509v3/standard_exts.h
   x509v3/v3_admis.h
   )

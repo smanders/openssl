@@ -40,7 +40,6 @@ set(testutil_srcs
   testutil/cb.c
   testutil/driver.c
   testutil/format_output.c
-  testutil/init.c
   testutil/main.c
   testutil/output.h
   testutil/output_helpers.c
@@ -49,6 +48,7 @@ set(testutil_srcs
   testutil/tap_bio.c
   testutil/test_cleanup.c
   testutil/tests.c
+  testutil/testutil_init.c
   testutil/tu_local.h
   testutil.h
   )
