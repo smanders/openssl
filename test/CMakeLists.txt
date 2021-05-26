@@ -71,6 +71,7 @@ foreach(t
   bioprinttest
   bntest
   casttest
+  cmactest
   cmsapitest
   conf_include_test
   constant_time_test
@@ -142,6 +143,7 @@ foreach(t
   clienthellotest
   danetest
   dtlsv1listentest
+  ssl_ctx_test
   sysdefaulttest
   tls13encryptiontest
   wpackettest
@@ -299,6 +301,10 @@ list(APPEND test_srcs
   testdsapub.pem
   testec-p256.pem
   testecpub-p256.pem
+  tested25519.pem
+  tested25519pub.pem
+  tested448.pem
+  tested448pub.pem
   testp7.pem
   testreq2.pem
   testrsa.pem
