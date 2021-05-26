@@ -10,7 +10,6 @@ foreach(t
   set_property(TARGET ${t} PROPERTY FOLDER ${folder})
   list(APPEND test_srcs ${t}.c)
 endforeach()
-target_include_directories(shlibloadtest PRIVATE ${CMAKE_BINARY_DIR}/crypto/include)
 target_link_libraries(shlibloadtest PRIVATE ${CMAKE_DL_LIBS})
 ########################################
 # tests that depend on crypto
@@ -183,7 +182,7 @@ foreach(t
   list(APPEND test_srcs ${t}.c)
 endforeach()
 ########################################
-# tests that depend on testutil and internal headers
+# tests that depend on testutil
 foreach(t
   asn1_internal_test
   chacha_internal_test
@@ -198,7 +197,6 @@ foreach(t
   )
   add_executable(${t} ${t}.c)
   target_link_libraries(${t} PRIVATE testutil)
-  target_include_directories(${t} PRIVATE ${CMAKE_SOURCE_DIR}/crypto/include)
   set_property(TARGET ${t} PROPERTY FOLDER ${folder})
   list(APPEND test_srcs ${t}.c)
 endforeach()
