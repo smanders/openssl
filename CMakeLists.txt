@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(openssl)
+project(openssl LANGUAGES C ASM)
 include(flags OPTIONAL)
 ########################################
 set_property(GLOBAL PROPERTY USE_FOLDERS ON) # enables MSVC Solution Folders

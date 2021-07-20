@@ -1771,9 +1771,6 @@ if(ASM_BUILD)
   source_group(whrlpool\\asm FILES ${whrlpool_asm_srcs})
   list(APPEND asm_srcs ${whrlpool_asm_srcs})
   ##########
-  if(UNIX) # gcc can compile .s files with the C compiler
-    set_property(SOURCE ${asm_srcs} PROPERTY LANGUAGE C)
-  endif()
   list(APPEND ${lib_name}_libsrcs ${asm_srcs})
 endif()
 ########################################
